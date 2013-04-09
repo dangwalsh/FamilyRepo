@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace FamilyRepo.Model
 {
-    class SkipStat
+    class ErrorStat
     {
-        private string _source;
+        private string _error;
 
-        public string Source
+        public string Error
         {
-            get { return _source; }
+            get { return _error; }
         }
 
-        public SkipStat(string s)
+        public ErrorStat(string e)
         {
-            _source = s;
+            _error = e;
         }
     }
 }

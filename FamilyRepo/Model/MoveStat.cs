@@ -8,23 +8,23 @@ namespace FamilyRepo.Model
 {
     class MoveStat
     {
-        private string _src;
-        private string _tgt;
+        private string _source;
+        private string _target;
 
-        public string Src
+        public string Source
         {
-            get { return _src; }
+            get { return _source; }
         }
 
-        public string Tgt
+        public string Target
         {
-            get { return _tgt; }
+            get { return _target; }
         }
 
         public MoveStat(string s, string t)
         {
-            _src = s;
-            _tgt = t;
+            _source = s;
+            _target = t;
         }
     }
 }
