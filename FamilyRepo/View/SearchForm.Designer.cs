@@ -46,7 +46,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.lblDel = new System.Windows.Forms.Label();
+            this.lblSkp = new System.Windows.Forms.Label();
             this.lblMov = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -55,13 +55,22 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabMove = new System.Windows.Forms.TabPage();
             this.tabSkip = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabError = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dataGridViewMov = new System.Windows.Forms.DataGridView();
+            this.dataGridViewSkp = new System.Windows.Forms.DataGridView();
+            this.dataGridViewErr = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabControl.SuspendLayout();
+            this.tabMove.SuspendLayout();
+            this.tabSkip.SuspendLayout();
+            this.tabError.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMov)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSkp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewErr)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -87,8 +96,9 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -101,8 +111,9 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -128,6 +139,7 @@
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSearch
             // 
@@ -138,6 +150,7 @@
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // groupBox1
             // 
@@ -210,7 +223,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.lblDel);
+            this.groupBox3.Controls.Add(this.lblSkp);
             this.groupBox3.Controls.Add(this.lblMov);
             this.groupBox3.Controls.Add(this.lblTime);
             this.groupBox3.Controls.Add(this.label5);
@@ -223,14 +236,14 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Stats";
             // 
-            // lblDel
+            // lblSkp
             // 
-            this.lblDel.AutoSize = true;
-            this.lblDel.Location = new System.Drawing.Point(97, 85);
-            this.lblDel.Name = "lblDel";
-            this.lblDel.Size = new System.Drawing.Size(35, 13);
-            this.lblDel.TabIndex = 5;
-            this.lblDel.Text = "label8";
+            this.lblSkp.AutoSize = true;
+            this.lblSkp.Location = new System.Drawing.Point(97, 85);
+            this.lblSkp.Name = "lblSkp";
+            this.lblSkp.Size = new System.Drawing.Size(35, 13);
+            this.lblSkp.TabIndex = 5;
+            this.lblSkp.Text = "label8";
             // 
             // lblMov
             // 
@@ -297,6 +310,7 @@
             // 
             // tabMove
             // 
+            this.tabMove.Controls.Add(this.dataGridViewMov);
             this.tabMove.Location = new System.Drawing.Point(4, 22);
             this.tabMove.Name = "tabMove";
             this.tabMove.Padding = new System.Windows.Forms.Padding(3);
@@ -307,6 +321,7 @@
             // 
             // tabSkip
             // 
+            this.tabSkip.Controls.Add(this.dataGridViewSkp);
             this.tabSkip.Location = new System.Drawing.Point(4, 22);
             this.tabSkip.Name = "tabSkip";
             this.tabSkip.Padding = new System.Windows.Forms.Padding(3);
@@ -314,6 +329,16 @@
             this.tabSkip.TabIndex = 1;
             this.tabSkip.Text = "Skipped";
             this.tabSkip.UseVisualStyleBackColor = true;
+            // 
+            // tabError
+            // 
+            this.tabError.Controls.Add(this.dataGridViewErr);
+            this.tabError.Location = new System.Drawing.Point(4, 22);
+            this.tabError.Name = "tabError";
+            this.tabError.Size = new System.Drawing.Size(745, 126);
+            this.tabError.TabIndex = 2;
+            this.tabError.Text = "Errors";
+            this.tabError.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -324,14 +349,41 @@
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             // 
-            // tabError
+            // dataGridViewMov
             // 
-            this.tabError.Location = new System.Drawing.Point(4, 22);
-            this.tabError.Name = "tabError";
-            this.tabError.Size = new System.Drawing.Size(745, 126);
-            this.tabError.TabIndex = 2;
-            this.tabError.Text = "Errors";
-            this.tabError.UseVisualStyleBackColor = true;
+            this.dataGridViewMov.AllowUserToAddRows = false;
+            this.dataGridViewMov.AllowUserToDeleteRows = false;
+            this.dataGridViewMov.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMov.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewMov.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewMov.Name = "dataGridViewMov";
+            this.dataGridViewMov.ReadOnly = true;
+            this.dataGridViewMov.Size = new System.Drawing.Size(739, 120);
+            this.dataGridViewMov.TabIndex = 0;
+            // 
+            // dataGridViewSkp
+            // 
+            this.dataGridViewSkp.AllowUserToAddRows = false;
+            this.dataGridViewSkp.AllowUserToDeleteRows = false;
+            this.dataGridViewSkp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSkp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewSkp.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewSkp.Name = "dataGridViewSkp";
+            this.dataGridViewSkp.ReadOnly = true;
+            this.dataGridViewSkp.Size = new System.Drawing.Size(739, 120);
+            this.dataGridViewSkp.TabIndex = 0;
+            // 
+            // dataGridViewErr
+            // 
+            this.dataGridViewErr.AllowUserToAddRows = false;
+            this.dataGridViewErr.AllowUserToDeleteRows = false;
+            this.dataGridViewErr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewErr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewErr.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewErr.Name = "dataGridViewErr";
+            this.dataGridViewErr.ReadOnly = true;
+            this.dataGridViewErr.Size = new System.Drawing.Size(745, 126);
+            this.dataGridViewErr.TabIndex = 0;
             // 
             // SearchForm
             // 
@@ -357,7 +409,13 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabControl.ResumeLayout(false);
+            this.tabMove.ResumeLayout(false);
+            this.tabSkip.ResumeLayout(false);
+            this.tabError.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMov)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSkp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewErr)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -382,7 +440,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label lblDel;
+        private System.Windows.Forms.Label lblSkp;
         private System.Windows.Forms.Label lblMov;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label label5;
@@ -393,5 +451,8 @@
         private System.Windows.Forms.TabPage tabSkip;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TabPage tabError;
+        private System.Windows.Forms.DataGridView dataGridViewMov;
+        private System.Windows.Forms.DataGridView dataGridViewSkp;
+        private System.Windows.Forms.DataGridView dataGridViewErr;
     }
 }

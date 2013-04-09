@@ -8,8 +8,8 @@ namespace FamilyRepo.Interfaces
 {
     interface IFileManage
     {
-        public void MoveFile(System.IO.FileInfo file);
-        public void DeleteFile(System.IO.FileInfo file);
-        public void SkipFile(System.IO.FileInfo file);
+        void MoveFile(System.IO.FileInfo file);
+        void DeleteFile(System.IO.FileInfo file);
+        void SkipFile(System.IO.FileInfo file);
     }
 }

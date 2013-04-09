@@ -32,27 +32,27 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnTgtBrowse = new System.Windows.Forms.Button();
             this.btnSrcBrowse = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtRoot = new System.Windows.Forms.TextBox();
+            this.btnTgtBrowse = new System.Windows.Forms.Button();
+            this.txtTarget = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.numSrchTm = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.numCopyTm = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.numSrchTm = new System.Windows.Forms.NumericUpDown();
             this.tgtBrowserDlg = new System.Windows.Forms.FolderBrowserDialog();
             this.srcBrowserDlg = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numSrchTm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCopyTm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSrchTm)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -64,6 +64,7 @@
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnApply
             // 
@@ -73,13 +74,14 @@
             this.btnApply.TabIndex = 1;
             this.btnApply.Text = "Apply";
             this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnSrcBrowse);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.txtRoot);
             this.groupBox1.Controls.Add(this.btnTgtBrowse);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.txtTarget);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
@@ -89,15 +91,41 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Path";
             // 
-            // label1
+            // btnSrcBrowse
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Target Folder:";
+            this.btnSrcBrowse.Location = new System.Drawing.Point(499, 68);
+            this.btnSrcBrowse.Name = "btnSrcBrowse";
+            this.btnSrcBrowse.Size = new System.Drawing.Size(48, 23);
+            this.btnSrcBrowse.TabIndex = 5;
+            this.btnSrcBrowse.Text = "...";
+            this.btnSrcBrowse.UseVisualStyleBackColor = true;
+            this.btnSrcBrowse.Click += new System.EventHandler(this.btnSrcBrowse_Click);
+            // 
+            // txtRoot
+            // 
+            this.txtRoot.Location = new System.Drawing.Point(105, 70);
+            this.txtRoot.Name = "txtRoot";
+            this.txtRoot.ReadOnly = true;
+            this.txtRoot.Size = new System.Drawing.Size(388, 20);
+            this.txtRoot.TabIndex = 4;
+            // 
+            // btnTgtBrowse
+            // 
+            this.btnTgtBrowse.Location = new System.Drawing.Point(499, 27);
+            this.btnTgtBrowse.Name = "btnTgtBrowse";
+            this.btnTgtBrowse.Size = new System.Drawing.Size(48, 23);
+            this.btnTgtBrowse.TabIndex = 3;
+            this.btnTgtBrowse.Text = "...";
+            this.btnTgtBrowse.UseVisualStyleBackColor = true;
+            this.btnTgtBrowse.Click += new System.EventHandler(this.btnTgtBrowse_Click);
+            // 
+            // txtTarget
+            // 
+            this.txtTarget.Location = new System.Drawing.Point(105, 29);
+            this.txtTarget.Name = "txtTarget";
+            this.txtTarget.ReadOnly = true;
+            this.txtTarget.Size = new System.Drawing.Size(388, 20);
+            this.txtTarget.TabIndex = 2;
             // 
             // label2
             // 
@@ -109,39 +137,15 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Source Folder:";
             // 
-            // textBox1
+            // label1
             // 
-            this.textBox1.Location = new System.Drawing.Point(105, 29);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(388, 20);
-            this.textBox1.TabIndex = 2;
-            // 
-            // btnTgtBrowse
-            // 
-            this.btnTgtBrowse.Location = new System.Drawing.Point(499, 27);
-            this.btnTgtBrowse.Name = "btnTgtBrowse";
-            this.btnTgtBrowse.Size = new System.Drawing.Size(48, 23);
-            this.btnTgtBrowse.TabIndex = 3;
-            this.btnTgtBrowse.Text = "...";
-            this.btnTgtBrowse.UseVisualStyleBackColor = true;
-            // 
-            // btnSrcBrowse
-            // 
-            this.btnSrcBrowse.Location = new System.Drawing.Point(499, 68);
-            this.btnSrcBrowse.Name = "btnSrcBrowse";
-            this.btnSrcBrowse.Size = new System.Drawing.Size(48, 23);
-            this.btnSrcBrowse.TabIndex = 5;
-            this.btnSrcBrowse.Text = "...";
-            this.btnSrcBrowse.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(105, 70);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(388, 20);
-            this.textBox2.TabIndex = 4;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(9, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(87, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Target Folder:";
             // 
             // groupBox2
             // 
@@ -160,30 +164,23 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Limits";
             // 
-            // numSrchTm
+            // label8
             // 
-            this.numSrchTm.Location = new System.Drawing.Point(111, 31);
-            this.numSrchTm.Name = "numSrchTm";
-            this.numSrchTm.Size = new System.Drawing.Size(51, 20);
-            this.numSrchTm.TabIndex = 0;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(215, 49);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(33, 13);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Note:";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // label3
+            // label7
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 33);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Max Search Time:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(168, 33);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(24, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "sec";
+            this.label7.Location = new System.Drawing.Point(249, 49);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(141, 29);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Zero seconds is equivalent to no maximum time";
             // 
             // label5
             // 
@@ -210,23 +207,30 @@
             this.numCopyTm.Size = new System.Drawing.Size(51, 20);
             this.numCopyTm.TabIndex = 3;
             // 
-            // label7
+            // label4
             // 
-            this.label7.Location = new System.Drawing.Point(249, 49);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(141, 29);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Zero seconds is equivalent to no maximum time";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(168, 33);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(24, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "sec";
             // 
-            // label8
+            // label3
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(215, 49);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(33, 13);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "Note:";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 33);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(93, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Max Search Time:";
+            // 
+            // numSrchTm
+            // 
+            this.numSrchTm.Location = new System.Drawing.Point(111, 31);
+            this.numSrchTm.Name = "numSrchTm";
+            this.numSrchTm.Size = new System.Drawing.Size(51, 20);
+            this.numSrchTm.TabIndex = 0;
             // 
             // SettingsForm
             // 
@@ -247,8 +251,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numSrchTm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCopyTm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSrchTm)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -259,9 +263,9 @@
         private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnSrcBrowse;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtRoot;
         private System.Windows.Forms.Button btnTgtBrowse;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtTarget;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;

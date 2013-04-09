@@ -3,77 +3,81 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 using FamilyRepo.Interfaces;
 
 namespace FamilyRepo.Model
 {
-    class Results : IStatManage
+    static class Results
     {
-        private int _moveCnt;
-        private int _skipCnt;
-        private int _errorCnt;
+        private static int _moveCnt;
+        private static int _skipCnt;
+        private static int _errorCnt;
+        private static List<MoveStat> _moved = new List<MoveStat>();
+        private static List<SkipStat> _skipped = new List<SkipStat>();
+        private static List<ErrorStat> _errors = new List<ErrorStat>();
 
-        private List<MoveStat> _moved = new List<MoveStat>();
-        private List<SkipStat> _skipped = new List<SkipStat>();
-        private List<string> _errors = new List<string>();
-
-        // expose count fields for use by form label
-        public int MoveCnt
+        #region Public count properties for use by windows form labels
+        public static int MoveCnt
         {
             get { return _moveCnt; }
         }
-        public int SkipCnt
+        public static int SkipCnt
         {
             get { return _skipCnt; }
         }
-        public int ErrorCnt
+        public static int ErrorCnt
         {
             get { return _errorCnt; }
         }
+        #endregion
 
-        // expose list fields for use by form datagridview
-        public List<MoveStat> Moved
+        #region Public list properties for use by windows form datagridviews
+        public static List<MoveStat> MovedFiles
         {
             get { return _moved; }
         }
-        public List<SkipStat> Skipped
+        public static List<SkipStat> SkippedFiles
         {
             get { return _skipped; }
         }
-        public List<string> Errors
+        public static List<ErrorStat> Errors
         {
             get { return _errors; }
         }
+        #endregion
 
-        // methods to be called by search class
-        public void UpPath(string path)
+        #region Public methods to be called by search class delegate
+        public static void UpPath(string path)
         {
             throw new NotImplementedException();
         }
 
-        public void UpTime() /* TODO: determine if this should live in another class interface */
+        public static void UpTime() /* TODO: determine if this should live in another class interface */
         {
             throw new NotImplementedException();
         }
 
-        public void UpMoved(string source, string target)
+        public static void UpMoved(string source, string target)
         {
             MoveStat ms = new MoveStat(source, target);
             _moved.Add(ms);
             _moveCnt = _moved.Count;
         }
 
-        public void UpSkipped(string source)
+        public static void UpSkipped(string source)
         {
             SkipStat ss = new SkipStat(source);
             _skipped.Add(ss);
             _skipCnt = _skipped.Count;
         }
 
-        public void LogError(string e)
+        public static void LogError(string e)
         {
-            _errors.Add(e);
+            ErrorStat es = new ErrorStat(e);
+            _errors.Add(es);
             _errorCnt = _errors.Count;
         }
+        #endregion
     }
 }

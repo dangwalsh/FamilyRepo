@@ -8,10 +8,10 @@ namespace FamilyRepo.Interfaces
 {
     interface IStatManage
     {
-        public void UpPath(string path);
-        public void UpTime();
-        public void UpMoved(string source, string target);
-        public void UpSkipped(string source);
-        public void LogError(string e);
+        void UpPath(string path);
+        void UpTime();
+        void UpMoved(string source, string target);
+        void UpSkipped(string source);
+        void LogError(string e);
     }
 }

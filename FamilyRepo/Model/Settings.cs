@@ -4,40 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FamilyRepo.Controller
+namespace FamilyRepo.Model
 {
-    class Settings
+    static class Settings
     {
-        private string _rootPath;
-        private string _targetPath;
-        private string _sourcePath;
-        private double _maxSearchTm;
-        private double _maxCopyTm;
+        private static string _rootPath;
+        private static string _targetPath;
+        private static string _sourcePath;
+        private static decimal _maxSearchTm;
+        private static decimal _maxCopyTm;
 
-        public string RootPath
+        #region Public properties for windows form
+        public static string RootPath
         {
             get { return _rootPath; }
             set { _rootPath = value; }
         }
-        public string TargetPath
+        public static string TargetPath
         {
             get { return _targetPath; }
             set { _targetPath = value; }
         }
-        public string SourcePath
+        public static string SourcePath
         {
             get { return _sourcePath; }
             set { _sourcePath = value; }
         }
-        public double MaxSearchTm
+        public static decimal MaxSearchTm
         {
             get { return _maxSearchTm; }
             set { _maxSearchTm = value; }
         }
-        public double MaxCopyTm
+        public static decimal MaxCopyTm
         {
             get { return _maxCopyTm; }
             set { _maxCopyTm = value; }
         }
+        #endregion
     }
 }
