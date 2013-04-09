@@ -3,18 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 using FamilyRepo.Interfaces;
 
 namespace FamilyRepo.Controller
 {
-    class SearchManager : IFileManage
+    class SearchManager : IFileManage, INotifyPropertyChanged
     {
         #region Association with Search class
         private SearchBase _search;
+        private Model.Stats _stats;
+        private string _currentPath;
+
+        public Model.Stats Stats
+        {
+            get { return _stats; }
+        }
+        public string CurrentPath
+        {
+            get { return _currentPath; }
+            set
+            {
+                _currentPath = value;
+                OnPropertyChanged("CurrentPath");
+            }
+        }
 
         public SearchManager()
         {
             _search = new SearchRecurse(this); // NOTE: change this type to instantiate a different search algorithm
+            _stats = new Model.Stats();
         }
         #endregion
 
@@ -29,17 +47,17 @@ namespace FamilyRepo.Controller
             }
             catch (System.IO.DirectoryNotFoundException e)
             {
-                Model.Results.LogError(e.Message);
+                _stats.LogError(e.Message);
             }
 
             if (newfile != null)
             {
-                Model.Results.UpMoved(file.FullName, newfile.FullName);
+                _stats.UpMoved(file.FullName, newfile.FullName);
                 DeleteFile(file);
             }
             else
             {
-                Model.Results.LogError("Copy failed for unkown reasons.");
+                _stats.LogError("Copy failed for unkown reasons.");
                 SkipFile(file);
             }
         }
@@ -52,13 +70,13 @@ namespace FamilyRepo.Controller
             }
             catch (UnauthorizedAccessException e)
             {
-                Model.Results.LogError(e.Message);
+                _stats.LogError(e.Message);
             }
         }
 
         public void SkipFile(System.IO.FileInfo file)
         {
-            Model.Results.UpSkipped(file.FullName);
+            _stats.UpSkipped(file.FullName);
         }
         #endregion
 
@@ -72,7 +90,7 @@ namespace FamilyRepo.Controller
             }
             catch (Exception e)
             {
-                Model.Results.LogError(e.Message);
+                _stats.LogError(e.Message);
             }
 
             // this will iterate through each job folder
@@ -89,12 +107,22 @@ namespace FamilyRepo.Controller
                     }
                     catch (Exception e)
                     {
-                        Model.Results.LogError(e.Message);
+                        _stats.LogError(e.Message);
                     }
                 }
             }
+
         }
         #endregion
+        private void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

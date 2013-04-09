@@ -54,23 +54,29 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabMove = new System.Windows.Forms.TabPage();
-            this.tabSkip = new System.Windows.Forms.TabPage();
-            this.tabError = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridViewMov = new System.Windows.Forms.DataGridView();
+            this.tabSkip = new System.Windows.Forms.TabPage();
             this.dataGridViewSkp = new System.Windows.Forms.DataGridView();
+            this.tabError = new System.Windows.Forms.TabPage();
             this.dataGridViewErr = new System.Windows.Forms.DataGridView();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Target = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Skipped = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblErr = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.Error = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabMove.SuspendLayout();
-            this.tabSkip.SuspendLayout();
-            this.tabError.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMov)).BeginInit();
+            this.tabSkip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSkp)).BeginInit();
+            this.tabError.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewErr)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -96,7 +102,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -111,7 +117,7 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
@@ -133,7 +139,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(697, 327);
+            this.btnCancel.Location = new System.Drawing.Point(697, 567);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -144,7 +150,7 @@
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(616, 327);
+            this.btnSearch.Location = new System.Drawing.Point(616, 567);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 2;
@@ -169,16 +175,16 @@
             // 
             // progTot
             // 
-            this.progTot.Location = new System.Drawing.Point(491, 72);
+            this.progTot.Location = new System.Drawing.Point(350, 72);
             this.progTot.Name = "progTot";
-            this.progTot.Size = new System.Drawing.Size(54, 23);
+            this.progTot.Size = new System.Drawing.Size(195, 23);
             this.progTot.TabIndex = 5;
             // 
             // progCur
             // 
-            this.progCur.Location = new System.Drawing.Point(491, 30);
+            this.progCur.Location = new System.Drawing.Point(350, 30);
             this.progCur.Name = "progCur";
-            this.progCur.Size = new System.Drawing.Size(54, 23);
+            this.progCur.Size = new System.Drawing.Size(195, 23);
             this.progCur.TabIndex = 4;
             // 
             // lblTgt
@@ -187,7 +193,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTgt.Location = new System.Drawing.Point(110, 72);
             this.lblTgt.Name = "lblTgt";
-            this.lblTgt.Size = new System.Drawing.Size(362, 27);
+            this.lblTgt.Size = new System.Drawing.Size(234, 23);
             this.lblTgt.TabIndex = 3;
             this.lblTgt.Text = "label3";
             // 
@@ -197,7 +203,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCur.Location = new System.Drawing.Point(110, 30);
             this.lblCur.Name = "lblCur";
-            this.lblCur.Size = new System.Drawing.Size(362, 27);
+            this.lblCur.Size = new System.Drawing.Size(234, 23);
             this.lblCur.TabIndex = 2;
             this.lblCur.Text = "label3";
             // 
@@ -223,6 +229,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.lblErr);
+            this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.lblSkp);
             this.groupBox3.Controls.Add(this.lblMov);
             this.groupBox3.Controls.Add(this.lblTime);
@@ -239,7 +247,7 @@
             // lblSkp
             // 
             this.lblSkp.AutoSize = true;
-            this.lblSkp.Location = new System.Drawing.Point(97, 85);
+            this.lblSkp.Location = new System.Drawing.Point(97, 67);
             this.lblSkp.Name = "lblSkp";
             this.lblSkp.Size = new System.Drawing.Size(35, 13);
             this.lblSkp.TabIndex = 5;
@@ -248,7 +256,7 @@
             // lblMov
             // 
             this.lblMov.AutoSize = true;
-            this.lblMov.Location = new System.Drawing.Point(97, 58);
+            this.lblMov.Location = new System.Drawing.Point(97, 46);
             this.lblMov.Name = "lblMov";
             this.lblMov.Size = new System.Drawing.Size(35, 13);
             this.lblMov.TabIndex = 4;
@@ -257,7 +265,7 @@
             // lblTime
             // 
             this.lblTime.AutoSize = true;
-            this.lblTime.Location = new System.Drawing.Point(97, 29);
+            this.lblTime.Location = new System.Drawing.Point(97, 25);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(35, 13);
             this.lblTime.TabIndex = 3;
@@ -267,7 +275,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(14, 85);
+            this.label5.Location = new System.Drawing.Point(14, 67);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(57, 13);
             this.label5.TabIndex = 2;
@@ -278,7 +286,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(22, 58);
+            this.label4.Location = new System.Drawing.Point(22, 46);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 1;
@@ -289,7 +297,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(15, 29);
+            this.label3.Location = new System.Drawing.Point(15, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 0;
@@ -305,7 +313,7 @@
             this.tabControl.Location = new System.Drawing.Point(3, 16);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(753, 152);
+            this.tabControl.Size = new System.Drawing.Size(753, 392);
             this.tabControl.TabIndex = 0;
             // 
             // tabMove
@@ -314,10 +322,26 @@
             this.tabMove.Location = new System.Drawing.Point(4, 22);
             this.tabMove.Name = "tabMove";
             this.tabMove.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMove.Size = new System.Drawing.Size(745, 126);
+            this.tabMove.Size = new System.Drawing.Size(745, 366);
             this.tabMove.TabIndex = 0;
             this.tabMove.Text = "Moved";
             this.tabMove.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewMov
+            // 
+            this.dataGridViewMov.AllowUserToAddRows = false;
+            this.dataGridViewMov.AllowUserToDeleteRows = false;
+            this.dataGridViewMov.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMov.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Source,
+            this.Target});
+            this.dataGridViewMov.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewMov.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewMov.Name = "dataGridViewMov";
+            this.dataGridViewMov.ReadOnly = true;
+            this.dataGridViewMov.RowHeadersVisible = false;
+            this.dataGridViewMov.Size = new System.Drawing.Size(739, 360);
+            this.dataGridViewMov.TabIndex = 0;
             // 
             // tabSkip
             // 
@@ -325,72 +349,121 @@
             this.tabSkip.Location = new System.Drawing.Point(4, 22);
             this.tabSkip.Name = "tabSkip";
             this.tabSkip.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSkip.Size = new System.Drawing.Size(745, 126);
+            this.tabSkip.Size = new System.Drawing.Size(745, 220);
             this.tabSkip.TabIndex = 1;
             this.tabSkip.Text = "Skipped";
             this.tabSkip.UseVisualStyleBackColor = true;
-            // 
-            // tabError
-            // 
-            this.tabError.Controls.Add(this.dataGridViewErr);
-            this.tabError.Location = new System.Drawing.Point(4, 22);
-            this.tabError.Name = "tabError";
-            this.tabError.Size = new System.Drawing.Size(745, 126);
-            this.tabError.TabIndex = 2;
-            this.tabError.Text = "Errors";
-            this.tabError.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.tabControl);
-            this.groupBox2.Location = new System.Drawing.Point(12, 150);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(759, 171);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            // 
-            // dataGridViewMov
-            // 
-            this.dataGridViewMov.AllowUserToAddRows = false;
-            this.dataGridViewMov.AllowUserToDeleteRows = false;
-            this.dataGridViewMov.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewMov.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewMov.Location = new System.Drawing.Point(3, 3);
-            this.dataGridViewMov.Name = "dataGridViewMov";
-            this.dataGridViewMov.ReadOnly = true;
-            this.dataGridViewMov.Size = new System.Drawing.Size(739, 120);
-            this.dataGridViewMov.TabIndex = 0;
             // 
             // dataGridViewSkp
             // 
             this.dataGridViewSkp.AllowUserToAddRows = false;
             this.dataGridViewSkp.AllowUserToDeleteRows = false;
             this.dataGridViewSkp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSkp.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Skipped});
             this.dataGridViewSkp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewSkp.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewSkp.Name = "dataGridViewSkp";
             this.dataGridViewSkp.ReadOnly = true;
-            this.dataGridViewSkp.Size = new System.Drawing.Size(739, 120);
+            this.dataGridViewSkp.RowHeadersVisible = false;
+            this.dataGridViewSkp.Size = new System.Drawing.Size(739, 214);
             this.dataGridViewSkp.TabIndex = 0;
+            // 
+            // tabError
+            // 
+            this.tabError.Controls.Add(this.dataGridViewErr);
+            this.tabError.Location = new System.Drawing.Point(4, 22);
+            this.tabError.Name = "tabError";
+            this.tabError.Size = new System.Drawing.Size(745, 366);
+            this.tabError.TabIndex = 2;
+            this.tabError.Text = "Errors";
+            this.tabError.UseVisualStyleBackColor = true;
             // 
             // dataGridViewErr
             // 
             this.dataGridViewErr.AllowUserToAddRows = false;
             this.dataGridViewErr.AllowUserToDeleteRows = false;
             this.dataGridViewErr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewErr.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Error});
             this.dataGridViewErr.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewErr.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewErr.Name = "dataGridViewErr";
             this.dataGridViewErr.ReadOnly = true;
-            this.dataGridViewErr.Size = new System.Drawing.Size(745, 126);
+            this.dataGridViewErr.RowHeadersVisible = false;
+            this.dataGridViewErr.Size = new System.Drawing.Size(745, 366);
             this.dataGridViewErr.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.tabControl);
+            this.groupBox2.Location = new System.Drawing.Point(12, 150);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(759, 411);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            // 
+            // Source
+            // 
+            this.Source.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Source.DataPropertyName = "Source";
+            this.Source.HeaderText = "Source";
+            this.Source.Name = "Source";
+            this.Source.ReadOnly = true;
+            // 
+            // Target
+            // 
+            this.Target.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Target.DataPropertyName = "Target";
+            this.Target.HeaderText = "Target";
+            this.Target.Name = "Target";
+            this.Target.ReadOnly = true;
+            // 
+            // Skipped
+            // 
+            this.Skipped.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Skipped.DataPropertyName = "Source";
+            this.Skipped.HeaderText = "Source";
+            this.Skipped.Name = "Skipped";
+            this.Skipped.ReadOnly = true;
+            // 
+            // lblErr
+            // 
+            this.lblErr.AutoSize = true;
+            this.lblErr.Location = new System.Drawing.Point(97, 88);
+            this.lblErr.Name = "lblErr";
+            this.lblErr.Size = new System.Drawing.Size(35, 13);
+            this.lblErr.TabIndex = 7;
+            this.lblErr.Text = "label8";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(27, 88);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Errors:";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // Error
+            // 
+            this.Error.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Error.DataPropertyName = "Error";
+            this.Error.HeaderText = "Error";
+            this.Error.Name = "Error";
+            this.Error.ReadOnly = true;
             // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(784, 362);
+            this.ClientSize = new System.Drawing.Size(784, 602);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -410,12 +483,12 @@
             this.groupBox3.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.tabMove.ResumeLayout(false);
-            this.tabSkip.ResumeLayout(false);
-            this.tabError.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMov)).EndInit();
+            this.tabSkip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSkp)).EndInit();
+            this.tabError.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewErr)).EndInit();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -454,5 +527,11 @@
         private System.Windows.Forms.DataGridView dataGridViewMov;
         private System.Windows.Forms.DataGridView dataGridViewSkp;
         private System.Windows.Forms.DataGridView dataGridViewErr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Source;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Target;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Skipped;
+        private System.Windows.Forms.Label lblErr;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Error;
     }
 }

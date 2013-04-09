@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\SearchManager.cs" />
-    <Compile Include="Interfaces\IStatManage.cs" />
     <Compile Include="Controller\SearchRecurse.cs" />
     <Compile Include="Controller\SearchBase.cs" />
     <Compile Include="Interfaces\IFileManage.cs" />
@@ -54,7 +53,6 @@
     <Compile Include="Model\ErrorStat.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\MoveStat.cs" />
-    <Compile Include="Model\Results.cs" />
     <Compile Include="Model\SkipStat.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

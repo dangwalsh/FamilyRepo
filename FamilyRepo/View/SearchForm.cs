@@ -23,13 +23,14 @@ namespace FamilyRepo.View
 
             InitializeComponent();
 
-            this.lblCur.Text = Settings.SourcePath;
             this.lblTgt.Text = Settings.TargetPath;
-            this.lblMov.Text = Results.MoveCnt.ToString();
-            this.lblSkp.Text = Results.SkipCnt.ToString();
-            this.dataGridViewMov.DataSource = Results.MovedFiles;
-            this.dataGridViewSkp.DataSource = Results.SkippedFiles;
-            this.dataGridViewErr.DataSource = Results.Errors;
+            this.lblCur.DataBindings.Add(new Binding("Text", _manager, "CurrentPath"));
+            this.lblMov.DataBindings.Add(new Binding("Text", _manager.Stats, "MoveCnt"));
+            this.lblSkp.DataBindings.Add(new Binding("Text", _manager.Stats, "SkipCnt"));
+            this.lblErr.DataBindings.Add(new Binding("Text", _manager.Stats, "ErrorCnt"));
+            this.dataGridViewMov.DataSource = _manager.Stats.MovedFiles;
+            this.dataGridViewSkp.DataSource = _manager.Stats.SkippedFiles;
+            this.dataGridViewErr.DataSource = _manager.Stats.Errors;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -48,7 +49,7 @@ namespace FamilyRepo.View
                 else
                 {
                     string error = "Root path does not exist";
-                    Results.LogError(error);
+                    _manager.Stats.LogError(error);
                     throw new Exception(error);
                 }
             }     
@@ -70,6 +71,7 @@ namespace FamilyRepo.View
         {
             SettingsForm setForm = new SettingsForm();
             setForm.ShowDialog();
+            this.lblTgt.Text = Settings.TargetPath;
         }
     }
 }

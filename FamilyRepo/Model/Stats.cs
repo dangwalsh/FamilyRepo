@@ -8,44 +8,66 @@ using FamilyRepo.Interfaces;
 
 namespace FamilyRepo.Model
 {
-    class Stats
+    class Stats : INotifyPropertyChanged
     {
         private int _moveCnt;
         private int _skipCnt;
         private int _errorCnt;
-        private List<MoveStat> _moved = new List<MoveStat>();
-        private List<SkipStat> _skipped = new List<SkipStat>();
-        private List<ErrorStat> _errors = new List<ErrorStat>();
+        private BindingList<MoveStat> _moved;
+        private BindingList<SkipStat> _skipped;
+        private BindingList<ErrorStat> _errors;
 
         #region Public count properties for use by windows form labels
         public int MoveCnt
         {
             get { return _moveCnt; }
+            set
+            {
+                _moveCnt = value;
+                OnPropertyChanged("MoveCnt");
+            }
         }
         public int SkipCnt
         {
             get { return _skipCnt; }
+            set
+            {
+                _skipCnt = value;
+                OnPropertyChanged("SkipCnt");
+            }
         }
         public int ErrorCnt
         {
             get { return _errorCnt; }
+            set
+            {
+                _errorCnt = value;
+                OnPropertyChanged("ErrorCnt");
+            }
         }
         #endregion
 
         #region Public list properties for use by windows form datagridviews
-        public List<MoveStat> MovedFiles
+        public BindingList<MoveStat> MovedFiles
         {
             get { return _moved; }
         }
-        public List<SkipStat> SkippedFiles
+        public BindingList<SkipStat> SkippedFiles
         {
             get { return _skipped; }
         }
-        public List<ErrorStat> Errors
+        public BindingList<ErrorStat> Errors
         {
             get { return _errors; }
         }
         #endregion
+
+        public Stats()
+        {
+            _moved = new BindingList<MoveStat>();
+            _skipped = new BindingList<SkipStat>();
+            _errors = new BindingList<ErrorStat>();
+        }
 
         #region Public methods to be called by search class delegate
         public void UpPath(string path)
@@ -62,22 +84,33 @@ namespace FamilyRepo.Model
         {
             MoveStat ms = new MoveStat(source, target);
             _moved.Add(ms);
-            _moveCnt = _moved.Count;
+            this.MoveCnt = _moved.Count;
         }
 
         public void UpSkipped(string source)
         {
             SkipStat ss = new SkipStat(source);
             _skipped.Add(ss);
-            _skipCnt = _skipped.Count;
+            this.SkipCnt = _skipped.Count;
         }
 
         public void LogError(string e)
         {
             ErrorStat es = new ErrorStat(e);
             _errors.Add(es);
-            _errorCnt = _errors.Count;
+            this.ErrorCnt = _errors.Count;
         }
         #endregion
+
+        private void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

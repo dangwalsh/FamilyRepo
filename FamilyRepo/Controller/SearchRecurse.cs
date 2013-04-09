@@ -9,9 +9,11 @@ namespace FamilyRepo.Controller
 {
     class SearchRecurse : SearchBase
     {
+        SearchManager _man;
         #region Constructors
         public SearchRecurse(IFileManage d) : base(d)
         {
+            _man = this.Delegate as SearchManager;
         }
         #endregion
 
@@ -21,6 +23,8 @@ namespace FamilyRepo.Controller
         // otherwise you may experience stack overflow
         public override void WalkDirectoryTree(System.IO.DirectoryInfo root)
         {
+            _man.CurrentPath = root.FullName;
+
             System.IO.FileInfo[] files = null;
             System.IO.DirectoryInfo[] subDirs = null;
 
@@ -31,11 +35,13 @@ namespace FamilyRepo.Controller
             }
             catch (UnauthorizedAccessException e)
             {
-                Model.Results.LogError(e.Message);
+                _man.Stats.LogError(e.Message);
+                //Model.Results.LogError(e.Message);
             }
             catch (System.IO.DirectoryNotFoundException e)
             {
-                Model.Results.LogError(e.Message);
+                _man.Stats.LogError(e.Message);
+                //Model.Results.LogError(e.Message);
             }
 
             if (files != null)

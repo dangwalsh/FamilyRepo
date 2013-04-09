@@ -11,11 +11,13 @@ namespace FamilyRepo.Controller
     {
         #region Delegate property to allow Manager and Search classes to communicate
         private IFileManage _delegate;
+       
 
         public IFileManage Delegate
         {
             get { return _delegate; }
         }
+
         #endregion
 
         #region Constructors
