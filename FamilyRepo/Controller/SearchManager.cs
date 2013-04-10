@@ -4,21 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Windows.Forms;
 using FamilyRepo.Interfaces;
 
 namespace FamilyRepo.Controller
 {
     class SearchManager : IFileManage, INotifyPropertyChanged
     {
-        #region Association with Search class
         private SearchBase _search;
-        private Model.Stats _stats;
         private string _currentPath;
+        private View.SearchForm _delegate;
 
-        public Model.Stats Stats
-        {
-            get { return _stats; }
-        }
+        #region Public properties
         public string CurrentPath
         {
             get { return _currentPath; }
@@ -28,11 +25,18 @@ namespace FamilyRepo.Controller
                 OnPropertyChanged("CurrentPath");
             }
         }
+        public View.SearchForm Delegate
+        {
+            get { return _delegate; }
+            set { _delegate = value; }
+        }
+        #endregion
 
-        public SearchManager()
+        #region Constructors
+        public SearchManager(View.SearchForm form)
         {
             _search = new SearchRecurse(this); // NOTE: change this type to instantiate a different search algorithm
-            _stats = new Model.Stats();
+            _delegate = form;
         }
         #endregion
 
@@ -47,17 +51,17 @@ namespace FamilyRepo.Controller
             }
             catch (System.IO.DirectoryNotFoundException e)
             {
-                _stats.LogError(e.Message);
+                Model.Results.LogError(e.Message);
             }
 
             if (newfile != null)
             {
-                _stats.UpMoved(file.FullName, newfile.FullName);
+                Model.Results.UpMoved(file.FullName, newfile.FullName);
                 DeleteFile(file);
             }
             else
             {
-                _stats.LogError("Copy failed for unkown reasons.");
+                Model.Results.LogError("Copy failed for unkown reasons.");
                 SkipFile(file);
             }
         }
@@ -70,32 +74,48 @@ namespace FamilyRepo.Controller
             }
             catch (UnauthorizedAccessException e)
             {
-                _stats.LogError(e.Message);
+                Model.Results.LogError(e.Message);
             }
         }
 
         public void SkipFile(System.IO.FileInfo file)
         {
-            _stats.UpSkipped(file.FullName);
+            Model.Results.UpSkipped(file.FullName);
         }
         #endregion
 
-        #region main program loop
+        #region INotifyPropertyChanged methods
+        private void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        #region Main program loop
         public void IterateProjects(System.IO.DirectoryInfo root)
         {
             System.IO.DirectoryInfo[] subDirs = null;
             try
             {
                 subDirs = root.GetDirectories();
+                this.Delegate.Progress.Maximum = subDirs.Count();
             }
             catch (Exception e)
             {
-                _stats.LogError(e.Message);
+                Model.Results.LogError(e.Message);
             }
-
             // this will iterate through each job folder
             foreach (System.IO.DirectoryInfo dirInfo in subDirs)
             {
+                Application.DoEvents();
+                this.Delegate.Progress.PerformStep();
+                this.Delegate.CurPath.Text = dirInfo.FullName;
                 string familyPath = dirInfo.FullName + @"\3_Process Families"; // TODO: set this name through the form
                 System.IO.DirectoryInfo familyDir = new System.IO.DirectoryInfo(familyPath);
 
@@ -107,22 +127,11 @@ namespace FamilyRepo.Controller
                     }
                     catch (Exception e)
                     {
-                        _stats.LogError(e.Message);
+                        Model.Results.LogError(e.Message);
                     }
                 }
             }
-
         }
         #endregion
-        private void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

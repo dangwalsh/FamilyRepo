@@ -17,6 +17,7 @@ namespace FamilyRepo.View
         string _oldTarget;
         string _oldRoot;
 
+        #region Constructors
         public SettingsForm()
         {
             _oldTarget = Settings.TargetPath;
@@ -31,7 +32,9 @@ namespace FamilyRepo.View
             this.numSrchTm.Value = Settings.MaxSearchTm;
             this.numCopyTm.Value = Settings.MaxCopyTm;
         }
+        #endregion
 
+        #region Form event methods
         private void btnTgtBrowse_Click(object sender, EventArgs e)
         {
             DialogResult result = this.tgtBrowserDlg.ShowDialog();
@@ -63,5 +66,6 @@ namespace FamilyRepo.View
             Settings.RootPath = _oldRoot;
             this.Close();
         }
+        #endregion
     }
 }

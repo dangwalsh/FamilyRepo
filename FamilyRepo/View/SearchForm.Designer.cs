@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,33 +40,27 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.progTot = new System.Windows.Forms.ProgressBar();
-            this.progCur = new System.Windows.Forms.ProgressBar();
             this.lblTgt = new System.Windows.Forms.Label();
             this.lblCur = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.progCur = new System.Windows.Forms.ProgressBar();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.lblSkp = new System.Windows.Forms.Label();
-            this.lblMov = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabMove = new System.Windows.Forms.TabPage();
             this.dataGridViewMov = new System.Windows.Forms.DataGridView();
-            this.tabSkip = new System.Windows.Forms.TabPage();
-            this.dataGridViewSkp = new System.Windows.Forms.DataGridView();
-            this.tabError = new System.Windows.Forms.TabPage();
-            this.dataGridViewErr = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Target = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabSkip = new System.Windows.Forms.TabPage();
+            this.dataGridViewSkp = new System.Windows.Forms.DataGridView();
             this.Skipped = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblErr = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.tabError = new System.Windows.Forms.TabPage();
+            this.dataGridViewErr = new System.Windows.Forms.DataGridView();
             this.Error = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.timerSrch = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -160,40 +155,24 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.progTot);
-            this.groupBox1.Controls.Add(this.progCur);
             this.groupBox1.Controls.Add(this.lblTgt);
             this.groupBox1.Controls.Add(this.lblCur);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(560, 116);
+            this.groupBox1.Size = new System.Drawing.Size(397, 95);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
-            // 
-            // progTot
-            // 
-            this.progTot.Location = new System.Drawing.Point(350, 72);
-            this.progTot.Name = "progTot";
-            this.progTot.Size = new System.Drawing.Size(195, 23);
-            this.progTot.TabIndex = 5;
-            // 
-            // progCur
-            // 
-            this.progCur.Location = new System.Drawing.Point(350, 30);
-            this.progCur.Name = "progCur";
-            this.progCur.Size = new System.Drawing.Size(195, 23);
-            this.progCur.TabIndex = 4;
             // 
             // lblTgt
             // 
             this.lblTgt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTgt.Location = new System.Drawing.Point(110, 72);
+            this.lblTgt.Location = new System.Drawing.Point(110, 61);
             this.lblTgt.Name = "lblTgt";
-            this.lblTgt.Size = new System.Drawing.Size(234, 23);
+            this.lblTgt.Size = new System.Drawing.Size(268, 13);
             this.lblTgt.TabIndex = 3;
             this.lblTgt.Text = "label3";
             // 
@@ -203,7 +182,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCur.Location = new System.Drawing.Point(110, 30);
             this.lblCur.Name = "lblCur";
-            this.lblCur.Size = new System.Drawing.Size(234, 23);
+            this.lblCur.Size = new System.Drawing.Size(268, 16);
             this.lblCur.TabIndex = 2;
             this.lblCur.Text = "label3";
             // 
@@ -211,7 +190,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(26, 72);
+            this.label2.Location = new System.Drawing.Point(26, 61);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 13);
             this.label2.TabIndex = 1;
@@ -227,81 +206,43 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Currrent Path:";
             // 
+            // progCur
+            // 
+            this.progCur.Location = new System.Drawing.Point(18, 29);
+            this.progCur.Name = "progCur";
+            this.progCur.Size = new System.Drawing.Size(317, 16);
+            this.progCur.TabIndex = 4;
+            // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.lblErr);
-            this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.lblSkp);
-            this.groupBox3.Controls.Add(this.lblMov);
+            this.groupBox3.Controls.Add(this.progCur);
             this.groupBox3.Controls.Add(this.lblTime);
-            this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Location = new System.Drawing.Point(579, 29);
+            this.groupBox3.Location = new System.Drawing.Point(416, 29);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(191, 115);
+            this.groupBox3.Size = new System.Drawing.Size(354, 94);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Stats";
-            // 
-            // lblSkp
-            // 
-            this.lblSkp.AutoSize = true;
-            this.lblSkp.Location = new System.Drawing.Point(97, 67);
-            this.lblSkp.Name = "lblSkp";
-            this.lblSkp.Size = new System.Drawing.Size(35, 13);
-            this.lblSkp.TabIndex = 5;
-            this.lblSkp.Text = "label8";
-            // 
-            // lblMov
-            // 
-            this.lblMov.AutoSize = true;
-            this.lblMov.Location = new System.Drawing.Point(97, 46);
-            this.lblMov.Name = "lblMov";
-            this.lblMov.Size = new System.Drawing.Size(35, 13);
-            this.lblMov.TabIndex = 4;
-            this.lblMov.Text = "label7";
+            this.groupBox3.Text = "Progress";
             // 
             // lblTime
             // 
             this.lblTime.AutoSize = true;
-            this.lblTime.Location = new System.Drawing.Point(97, 25);
+            this.lblTime.Location = new System.Drawing.Point(95, 60);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(35, 13);
             this.lblTime.TabIndex = 3;
             this.lblTime.Text = "label6";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(14, 67);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Skipped:";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(22, 46);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Moved:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(15, 25);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(15, 60);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 13);
+            this.label3.Size = new System.Drawing.Size(74, 13);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Elapsed:";
+            this.label3.Text = "Time Elapsed:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // tabControl
@@ -343,13 +284,29 @@
             this.dataGridViewMov.Size = new System.Drawing.Size(739, 360);
             this.dataGridViewMov.TabIndex = 0;
             // 
+            // Source
+            // 
+            this.Source.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Source.DataPropertyName = "Source";
+            this.Source.HeaderText = "Source";
+            this.Source.Name = "Source";
+            this.Source.ReadOnly = true;
+            // 
+            // Target
+            // 
+            this.Target.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Target.DataPropertyName = "Target";
+            this.Target.HeaderText = "Target";
+            this.Target.Name = "Target";
+            this.Target.ReadOnly = true;
+            // 
             // tabSkip
             // 
             this.tabSkip.Controls.Add(this.dataGridViewSkp);
             this.tabSkip.Location = new System.Drawing.Point(4, 22);
             this.tabSkip.Name = "tabSkip";
             this.tabSkip.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSkip.Size = new System.Drawing.Size(745, 220);
+            this.tabSkip.Size = new System.Drawing.Size(745, 366);
             this.tabSkip.TabIndex = 1;
             this.tabSkip.Text = "Skipped";
             this.tabSkip.UseVisualStyleBackColor = true;
@@ -366,8 +323,16 @@
             this.dataGridViewSkp.Name = "dataGridViewSkp";
             this.dataGridViewSkp.ReadOnly = true;
             this.dataGridViewSkp.RowHeadersVisible = false;
-            this.dataGridViewSkp.Size = new System.Drawing.Size(739, 214);
+            this.dataGridViewSkp.Size = new System.Drawing.Size(739, 360);
             this.dataGridViewSkp.TabIndex = 0;
+            // 
+            // Skipped
+            // 
+            this.Skipped.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Skipped.DataPropertyName = "Source";
+            this.Skipped.HeaderText = "Source";
+            this.Skipped.Name = "Skipped";
+            this.Skipped.ReadOnly = true;
             // 
             // tabError
             // 
@@ -394,6 +359,14 @@
             this.dataGridViewErr.Size = new System.Drawing.Size(745, 366);
             this.dataGridViewErr.TabIndex = 0;
             // 
+            // Error
+            // 
+            this.Error.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Error.DataPropertyName = "Error";
+            this.Error.HeaderText = "Error";
+            this.Error.Name = "Error";
+            this.Error.ReadOnly = true;
+            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -405,58 +378,6 @@
             this.groupBox2.Size = new System.Drawing.Size(759, 411);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
-            // 
-            // Source
-            // 
-            this.Source.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Source.DataPropertyName = "Source";
-            this.Source.HeaderText = "Source";
-            this.Source.Name = "Source";
-            this.Source.ReadOnly = true;
-            // 
-            // Target
-            // 
-            this.Target.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Target.DataPropertyName = "Target";
-            this.Target.HeaderText = "Target";
-            this.Target.Name = "Target";
-            this.Target.ReadOnly = true;
-            // 
-            // Skipped
-            // 
-            this.Skipped.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Skipped.DataPropertyName = "Source";
-            this.Skipped.HeaderText = "Source";
-            this.Skipped.Name = "Skipped";
-            this.Skipped.ReadOnly = true;
-            // 
-            // lblErr
-            // 
-            this.lblErr.AutoSize = true;
-            this.lblErr.Location = new System.Drawing.Point(97, 88);
-            this.lblErr.Name = "lblErr";
-            this.lblErr.Size = new System.Drawing.Size(35, 13);
-            this.lblErr.TabIndex = 7;
-            this.lblErr.Text = "label8";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(27, 88);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 13);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Errors:";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // Error
-            // 
-            this.Error.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Error.DataPropertyName = "Error";
-            this.Error.HeaderText = "Error";
-            this.Error.Name = "Error";
-            this.Error.ReadOnly = true;
             // 
             // SearchForm
             // 
@@ -506,18 +427,13 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ProgressBar progTot;
         private System.Windows.Forms.ProgressBar progCur;
         private System.Windows.Forms.Label lblTgt;
         private System.Windows.Forms.Label lblCur;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label lblSkp;
-        private System.Windows.Forms.Label lblMov;
         private System.Windows.Forms.Label lblTime;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabMove;
@@ -530,8 +446,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Source;
         private System.Windows.Forms.DataGridViewTextBoxColumn Target;
         private System.Windows.Forms.DataGridViewTextBoxColumn Skipped;
-        private System.Windows.Forms.Label lblErr;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Error;
+        private System.Windows.Forms.Timer timerSrch;
     }
 }

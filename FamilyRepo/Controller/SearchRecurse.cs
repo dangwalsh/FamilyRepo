@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FamilyRepo.Interfaces;
+using System.Windows.Forms;
 
 namespace FamilyRepo.Controller
 {
     class SearchRecurse : SearchBase
     {
-        SearchManager _man;
+        //SearchManager _man;
         #region Constructors
         public SearchRecurse(IFileManage d) : base(d)
         {
-            _man = this.Delegate as SearchManager;
+            //_man = this.Delegate as SearchManager;
         }
         #endregion
 
@@ -23,8 +24,7 @@ namespace FamilyRepo.Controller
         // otherwise you may experience stack overflow
         public override void WalkDirectoryTree(System.IO.DirectoryInfo root)
         {
-            _man.CurrentPath = root.FullName;
-
+            Application.DoEvents();
             System.IO.FileInfo[] files = null;
             System.IO.DirectoryInfo[] subDirs = null;
 
@@ -35,19 +35,18 @@ namespace FamilyRepo.Controller
             }
             catch (UnauthorizedAccessException e)
             {
-                _man.Stats.LogError(e.Message);
-                //Model.Results.LogError(e.Message);
+                Model.Results.LogError(e.Message);
             }
             catch (System.IO.DirectoryNotFoundException e)
             {
-                _man.Stats.LogError(e.Message);
-                //Model.Results.LogError(e.Message);
+                Model.Results.LogError(e.Message);
             }
 
             if (files != null)
             {
                 foreach (System.IO.FileInfo fi in files)
                 {
+                    Application.DoEvents();
                     if(fi.Extension == ".rfa")
                         this.Delegate.MoveFile(fi);
                 }
