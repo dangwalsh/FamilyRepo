@@ -8,8 +8,8 @@ namespace FamilyRepo.Model
 {
     static class Settings
     {
-        private static string _rootPath;
-        private static string _targetPath;
+        private static string _rootPath = @"J:";
+        private static string _targetPath = @"L:\4_Revit\Family Inbox";
         private static string _sourcePath;
         private static decimal _maxSearchTm;
         private static decimal _maxCopyTm;

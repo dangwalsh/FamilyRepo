@@ -8,16 +8,14 @@ using FamilyRepo.Interfaces;
 namespace FamilyRepo.Controller
 {
     abstract class SearchBase
-    {
-        #region Delegate property to allow Manager and Search classes to communicate
+    {  
         private IFileManage _delegate;
-       
 
+        #region Delegate property to allow Manager and Search classes to communicate
         public IFileManage Delegate
         {
             get { return _delegate; }
         }
-
         #endregion
 
         #region Constructors

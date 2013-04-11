@@ -17,14 +17,17 @@ namespace FamilyRepo.Model
         public static BindingList<MoveStat> MovedFiles
         {
             get { return Results._moved; }
+            set { _moved = value; }
         }
         public static BindingList<SkipStat> SkippedFiles
         {
             get { return Results._skipped; }
+            set { _skipped = value; }
         }
         public static BindingList<ErrorStat> Errors
         {
             get { return Results._errors; }
+            set { _errors = value; }
         }
         #endregion
 

@@ -8,8 +8,14 @@ namespace FamilyRepo.Model
 {
     class ErrorStat
     {
+        private static int _count;
+        private int _number;
         private string _error;
 
+        public int Number
+        {
+            get { return _number; }
+        }
         public string Error
         {
             get { return _error; }
@@ -17,6 +23,8 @@ namespace FamilyRepo.Model
 
         public ErrorStat(string e)
         {
+            ++_count;
+            _number = _count; 
             _error = e;
         }
     }

@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,20 +50,23 @@
             this.progCur = new System.Windows.Forms.ProgressBar();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lblTime = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabMove = new System.Windows.Forms.TabPage();
             this.dataGridViewMov = new System.Windows.Forms.DataGridView();
+            this.NumMove = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Target = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabSkip = new System.Windows.Forms.TabPage();
             this.dataGridViewSkp = new System.Windows.Forms.DataGridView();
+            this.NumSkip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Skipped = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabError = new System.Windows.Forms.TabPage();
             this.dataGridViewErr = new System.Windows.Forms.DataGridView();
+            this.NumError = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Error = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.timerSrch = new System.Windows.Forms.Timer(this.components);
+            this.btnReset = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -82,7 +88,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(684, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -129,12 +135,13 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(697, 567);
+            this.btnCancel.Location = new System.Drawing.Point(597, 627);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -145,7 +152,7 @@
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(616, 567);
+            this.btnSearch.Location = new System.Drawing.Point(516, 627);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 2;
@@ -155,13 +162,15 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.lblTgt);
             this.groupBox1.Controls.Add(this.lblCur);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(397, 95);
+            this.groupBox1.Size = new System.Drawing.Size(497, 95);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
@@ -172,9 +181,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTgt.Location = new System.Drawing.Point(110, 61);
             this.lblTgt.Name = "lblTgt";
-            this.lblTgt.Size = new System.Drawing.Size(268, 13);
+            this.lblTgt.Size = new System.Drawing.Size(368, 13);
             this.lblTgt.TabIndex = 3;
-            this.lblTgt.Text = "label3";
+            this.lblTgt.Text = "L:\\4_Revit\\Family Inbox";
             // 
             // lblCur
             // 
@@ -182,9 +191,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCur.Location = new System.Drawing.Point(110, 30);
             this.lblCur.Name = "lblCur";
-            this.lblCur.Size = new System.Drawing.Size(268, 16);
+            this.lblCur.Size = new System.Drawing.Size(368, 16);
             this.lblCur.TabIndex = 2;
-            this.lblCur.Text = "label3";
+            this.lblCur.Text = "J:\\0000";
             // 
             // label2
             // 
@@ -202,48 +211,39 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(18, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 13);
+            this.label1.Size = new System.Drawing.Size(81, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Currrent Path:";
+            this.label1.Text = "Source Path:";
             // 
             // progCur
             // 
-            this.progCur.Location = new System.Drawing.Point(18, 29);
+            this.progCur.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progCur.Location = new System.Drawing.Point(12, 627);
             this.progCur.Name = "progCur";
-            this.progCur.Size = new System.Drawing.Size(317, 16);
+            this.progCur.Size = new System.Drawing.Size(498, 23);
             this.progCur.TabIndex = 4;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.progCur);
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.lblTime);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Location = new System.Drawing.Point(416, 29);
+            this.groupBox3.Location = new System.Drawing.Point(516, 29);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(354, 94);
+            this.groupBox3.Size = new System.Drawing.Size(154, 94);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Progress";
+            this.groupBox3.Text = "Elapsed Time";
             // 
             // lblTime
             // 
-            this.lblTime.AutoSize = true;
-            this.lblTime.Location = new System.Drawing.Point(95, 60);
+            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.Location = new System.Drawing.Point(6, 16);
             this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(35, 13);
+            this.lblTime.Size = new System.Drawing.Size(139, 75);
             this.lblTime.TabIndex = 3;
-            this.lblTime.Text = "label6";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(15, 60);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Time Elapsed:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblTime.Text = "00:00:00";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabControl
             // 
@@ -251,10 +251,11 @@
             this.tabControl.Controls.Add(this.tabSkip);
             this.tabControl.Controls.Add(this.tabError);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.tabControl.Location = new System.Drawing.Point(3, 16);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(753, 392);
+            this.tabControl.Size = new System.Drawing.Size(653, 473);
             this.tabControl.TabIndex = 0;
             // 
             // tabMove
@@ -263,7 +264,7 @@
             this.tabMove.Location = new System.Drawing.Point(4, 22);
             this.tabMove.Name = "tabMove";
             this.tabMove.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMove.Size = new System.Drawing.Size(745, 366);
+            this.tabMove.Size = new System.Drawing.Size(645, 447);
             this.tabMove.TabIndex = 0;
             this.tabMove.Text = "Moved";
             this.tabMove.UseVisualStyleBackColor = true;
@@ -272,8 +273,12 @@
             // 
             this.dataGridViewMov.AllowUserToAddRows = false;
             this.dataGridViewMov.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewMov.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewMov.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewMov.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMov.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.NumMove,
             this.Source,
             this.Target});
             this.dataGridViewMov.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -281,8 +286,17 @@
             this.dataGridViewMov.Name = "dataGridViewMov";
             this.dataGridViewMov.ReadOnly = true;
             this.dataGridViewMov.RowHeadersVisible = false;
-            this.dataGridViewMov.Size = new System.Drawing.Size(739, 360);
+            this.dataGridViewMov.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewMov.Size = new System.Drawing.Size(639, 441);
             this.dataGridViewMov.TabIndex = 0;
+            // 
+            // NumMove
+            // 
+            this.NumMove.DataPropertyName = "Number";
+            this.NumMove.HeaderText = "No.";
+            this.NumMove.Name = "NumMove";
+            this.NumMove.ReadOnly = true;
+            this.NumMove.Width = 50;
             // 
             // Source
             // 
@@ -306,7 +320,7 @@
             this.tabSkip.Location = new System.Drawing.Point(4, 22);
             this.tabSkip.Name = "tabSkip";
             this.tabSkip.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSkip.Size = new System.Drawing.Size(745, 366);
+            this.tabSkip.Size = new System.Drawing.Size(645, 447);
             this.tabSkip.TabIndex = 1;
             this.tabSkip.Text = "Skipped";
             this.tabSkip.UseVisualStyleBackColor = true;
@@ -315,16 +329,29 @@
             // 
             this.dataGridViewSkp.AllowUserToAddRows = false;
             this.dataGridViewSkp.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewSkp.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewSkp.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewSkp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSkp.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.NumSkip,
             this.Skipped});
             this.dataGridViewSkp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewSkp.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewSkp.Name = "dataGridViewSkp";
             this.dataGridViewSkp.ReadOnly = true;
             this.dataGridViewSkp.RowHeadersVisible = false;
-            this.dataGridViewSkp.Size = new System.Drawing.Size(739, 360);
+            this.dataGridViewSkp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewSkp.Size = new System.Drawing.Size(639, 441);
             this.dataGridViewSkp.TabIndex = 0;
+            // 
+            // NumSkip
+            // 
+            this.NumSkip.DataPropertyName = "Number";
+            this.NumSkip.HeaderText = "No.";
+            this.NumSkip.Name = "NumSkip";
+            this.NumSkip.ReadOnly = true;
+            this.NumSkip.Width = 50;
             // 
             // Skipped
             // 
@@ -339,7 +366,8 @@
             this.tabError.Controls.Add(this.dataGridViewErr);
             this.tabError.Location = new System.Drawing.Point(4, 22);
             this.tabError.Name = "tabError";
-            this.tabError.Size = new System.Drawing.Size(745, 366);
+            this.tabError.Padding = new System.Windows.Forms.Padding(3);
+            this.tabError.Size = new System.Drawing.Size(645, 447);
             this.tabError.TabIndex = 2;
             this.tabError.Text = "Errors";
             this.tabError.UseVisualStyleBackColor = true;
@@ -348,16 +376,29 @@
             // 
             this.dataGridViewErr.AllowUserToAddRows = false;
             this.dataGridViewErr.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewErr.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewErr.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewErr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewErr.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.NumError,
             this.Error});
             this.dataGridViewErr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewErr.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewErr.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewErr.Name = "dataGridViewErr";
             this.dataGridViewErr.ReadOnly = true;
             this.dataGridViewErr.RowHeadersVisible = false;
-            this.dataGridViewErr.Size = new System.Drawing.Size(745, 366);
+            this.dataGridViewErr.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewErr.Size = new System.Drawing.Size(639, 441);
             this.dataGridViewErr.TabIndex = 0;
+            // 
+            // NumError
+            // 
+            this.NumError.DataPropertyName = "Number";
+            this.NumError.HeaderText = "No.";
+            this.NumError.Name = "NumError";
+            this.NumError.ReadOnly = true;
+            this.NumError.Width = 50;
             // 
             // Error
             // 
@@ -373,18 +414,34 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.tabControl);
-            this.groupBox2.Location = new System.Drawing.Point(12, 150);
+            this.groupBox2.Location = new System.Drawing.Point(12, 129);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(759, 411);
+            this.groupBox2.Size = new System.Drawing.Size(659, 492);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
+            // 
+            // btnReset
+            // 
+            this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReset.BackColor = System.Drawing.SystemColors.Control;
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.Location = new System.Drawing.Point(12, 627);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.TabIndex = 6;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(784, 602);
+            this.ClientSize = new System.Drawing.Size(684, 662);
+            this.Controls.Add(this.btnReset);
+            this.Controls.Add(this.progCur);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -393,15 +450,15 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(600, 600);
             this.Name = "SearchForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Repo";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.tabMove.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMov)).EndInit();
@@ -434,7 +491,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label lblTime;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabMove;
         private System.Windows.Forms.TabPage tabSkip;
@@ -443,10 +499,14 @@
         private System.Windows.Forms.DataGridView dataGridViewMov;
         private System.Windows.Forms.DataGridView dataGridViewSkp;
         private System.Windows.Forms.DataGridView dataGridViewErr;
+        private System.Windows.Forms.Timer timerSrch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumMove;
         private System.Windows.Forms.DataGridViewTextBoxColumn Source;
         private System.Windows.Forms.DataGridViewTextBoxColumn Target;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumSkip;
         private System.Windows.Forms.DataGridViewTextBoxColumn Skipped;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumError;
         private System.Windows.Forms.DataGridViewTextBoxColumn Error;
-        private System.Windows.Forms.Timer timerSrch;
+        private System.Windows.Forms.Button btnReset;
     }
 }

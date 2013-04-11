@@ -19,6 +19,7 @@ namespace FamilyRepo.View
         ProgressBar _progress;
         Label _curPath;
         int _seconds;
+        string _time = "00:00:00";
 
         #region Public properties
         public ProgressBar Progress // needed for updates via SearchManager
@@ -42,10 +43,12 @@ namespace FamilyRepo.View
             _curPath = this.lblCur;
             _manager = new SearchManager(this);
 
+            this.btnReset.Visible = false;
+            this.progCur.Visible = false;
             this.progCur.Minimum = 1;
             this.progCur.Step = 1;
             this.lblTgt.Text = Settings.TargetPath;
-            this.lblTime.Text = "0 sec";
+            this.lblTime.Text = "";
             this.lblCur.DataBindings.Add(new Binding("Text", _manager, "CurrentPath"));
             this.dataGridViewMov.DataSource = Results.MovedFiles;
             this.dataGridViewSkp.DataSource = Results.SkippedFiles;
@@ -67,9 +70,19 @@ namespace FamilyRepo.View
                 System.IO.DirectoryInfo root = new System.IO.DirectoryInfo(Settings.RootPath);
                 if (root.Exists)
                 {
+                    this.progCur.Visible = true;
+                    this.lblTime.Text = "00:00:00";
                     this.timerSrch.Start();
                     _manager.IterateProjects(root);
                     this.timerSrch.Stop();
+                    this.progCur.Visible = false;
+                    this.btnReset.Visible = true;
+                    string prompt = "Migration completed succesfully!\nTime: " + _time;
+                    int n = Results.Errors.Count;
+                    if (n > 0)
+                        prompt += "\nErrors: " + n;
+                    MessageBox.Show(prompt, "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                    this.lblTime.Text = "";
                 }
                 else
                 {
@@ -102,8 +115,28 @@ namespace FamilyRepo.View
         private void TimerEventProcessor(Object obj, EventArgs events)
         {
             _seconds += this.timerSrch.Interval / 1000;
-            this.lblTime.Text = _seconds.ToString() + " sec";
+            TimeSpan t = TimeSpan.FromSeconds(_seconds);
+            _time = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                                        t.Hours,
+                                        t.Minutes,
+                                        t.Seconds);
+            this.lblTime.Text = _time;
+        }
+        
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm helpForm = new AboutForm();
+            helpForm.ShowDialog();
         }
         #endregion
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            this.lblTime.Text = "00:00:00";
+            Results.MovedFiles.Clear();
+            Results.SkippedFiles.Clear();
+            Results.Errors.Clear();
+            this.btnReset.Visible = false;
+        }
     }
 }

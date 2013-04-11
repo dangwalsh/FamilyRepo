@@ -10,11 +10,10 @@ namespace FamilyRepo.Controller
 {
     class SearchRecurse : SearchBase
     {
-        //SearchManager _man;
         #region Constructors
         public SearchRecurse(IFileManage d) : base(d)
         {
-            //_man = this.Delegate as SearchManager;
+
         }
         #endregion
 
